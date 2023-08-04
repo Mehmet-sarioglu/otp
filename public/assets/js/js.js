@@ -17,13 +17,13 @@ function render() {
     );
     recaptchaVerifier.render();
 }
-var form = document.getElementById("formId");
+let form = document.getElementById("formId");
 function submitForm(event) {
     event.preventDefault();
-    var myButton = document.getElementById("myButton");
+    let myButton = document.getElementById("myButton");
     myButton.className = myButton.className + " loading";
     // send otp
-    var number = $("#number").val();
+    let number = $("#number").val();
     firebase
         .auth()
         .signInWithPhoneNumber(number, window.recaptchaVerifier)
@@ -51,7 +51,7 @@ function submitForm(event) {
                             var user = result.user;
                             console.log(user);
                             console.log("Ok");
-                            window.location.href = "/index";
+                            form.submit();
                         })
                         .catch(function (error) {
                             console.log("verify");

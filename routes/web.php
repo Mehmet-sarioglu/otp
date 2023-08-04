@@ -14,11 +14,11 @@ use App\Http\Controllers\PhoneAuthController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
+Route::get('/',[\App\Http\Controllers\HomeController::class,'index'])->middleware('auth');
 
-Route::get('/index', function () {
-    return view('index');
-})->name('ok');
+Route::post('/login',[\App\Http\Controllers\AuthController::class,'login'])->name('login');
+
+Route::get('/login',[\App\Http\Controllers\AuthController::class,'index'])->middleware('guest');
+Route::get('/logout', [\App\Http\Controllers\AuthController::class,'logout'])->name('logout')->middleware('auth');
+Route::post('/userEdit',[\App\Http\Controllers\HomeController::class,'nameEdit'])->middleware('auth');
